@@ -1,0 +1,125 @@
+---
+title: "FAQ"
+author: "Antonio Lúcio"
+date: "16 de maio de 2017"
+output:
+  html_document:
+    theme: yeti
+    toc: true
+    toc_float: true
+---
+
+```{r}
+library(dplyr, warn.conflicts = FALSE)
+library(ggplot2)
+library(datasets)
+theme_set(theme_bw())
+```
+Nos exemplos a seguir, iremos utilizar dataSets que já vem no R
+
+##Diferença entre bar plot e histograma 
+A diferença entre eles não reside no fato de que o gráfico de barras possuí espaço entre suas colunas e o histograma não.
+A diferença é sobre o tipo de informação que cada um representa.
+
+Observe o gráfico a seguir:
+```{r}
+ggplot(iris, aes(x = Species, y = Sepal.Width))+
+  geom_bar(stat = "identity")
+```
+
+Aqui as barras representam diferentes categorias e poderíamos mover a barra da "setosa" para frente da "versicolor" sem perder/alterar alguma informação. Ou seja a ordem não é importante.
+
+Agora observe este histograma:
+
+```{r}
+ggplot(diamonds, aes(price)) +
+  geom_histogram()
+```
+
+As barras não representam mais diferentes categorias.
+A sua altura agora representa o número de diamantes naquele valor. E se mudarmos a posição da primeira barra (por exemplo), estaremos dizendo que existem mais diamantes numa outra faixa de preço. 
+
+##Como mudo a ordem das barras no meu plot?
+
+Dado o exemplo a seguir:
+
+```{r}
+ggplot(iris, aes(x = Species, y = Sepal.Width))+
+  geom_bar(stat = "identity")
+```
+
+Observamos que as barras estão desordenadas. Para deixar ordenado , devemos fazer utilizar o reorder
+
+```{r}
+ggplot(iris, aes(x = reorder(Species, Sepal.Width), y = Sepal.Width))+
+  geom_bar(stat = "identity")
+
+```
+
+##Como mudo o nome dos eixos no gráfico?
+
+Utilizando como exemplo o gráfico acima, observamos que o nome do eixo x está 
+como "reorder(Species, Sepal.Width)" e que o eixo y está como "Speal.Width".
+
+Para alterar os nomes do eixos, utilizamos:
+```{r}
+ggplot(iris, aes(x = reorder(Species, Sepal.Width), y = Sepal.Width))+
+  geom_bar(stat = "identity") +
+  xlab("Espécie") + #eixo X
+  ylab("Tamanho") #eixo Y
+
+```
+
+##Como visualizar os histogramas de todas as minhas variáveis numéricas rapidamente?
+
+```{r}
+hist(AirPassengers)
+```
+
+##Como saber o tipo da variável?
+```{r}
+mode(AirPassengers)
+```
+
+
+##Como mudo o nome das colunas?
+
+Primeiro, vamos criar um novo dataFrame
+```{r}
+passageiros = data.frame(AirPassengers)
+```
+
+Observe que o DF criado possui uma coluna chamada AirPassengers]
+```{r}
+View(passageiros)
+```
+
+Agora queremos mudar o nome dessa coluna para numPassageiro, para isso faremos:
+```{r}
+passageiros = rename(passageiros, numPassageiro = AirPassengers)
+```
+
+Para conferir
+```{r}
+View(passageiros)
+```
+
+##Como saber se tem na ou vazio? Como faço pra ajeitar isso?
+Primeiro, vamos criar uma matriz vazia e conferir que está vazia
+```{r}
+matriz.vazia <- matrix(nrow=3,ncol=4)
+matriz.vazia
+```
+
+Agora para substituir onde tem NA por 0 (por exemplo), utilizamos:
+```{r}
+matriz.vazia[is.na(matriz.vazia)] <- 0 
+matriz.vazia
+```
+
+
+##Como calcular a proporção de linhas que tem um certo valor para uma variável categórica?
+
+
+
+
