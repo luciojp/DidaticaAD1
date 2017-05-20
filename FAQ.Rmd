@@ -15,6 +15,24 @@ library(ggplot2)
 library(datasets)
 theme_set(theme_bw())
 ```
+
+
+##Problemas com caracteres estranhos num DF ou ao abrir um .Rmd num outro lugar
+- Caso ao abrir um csv esteja vendo caracteres estranhos, tente fazer o seguinte: 
+```{r}
+read.csv("arquivo.csv", encoding = "utf-8")
+```
+
+- Caso esteja com problemas ao abrir o .Rmd em um outro computador:
+Vá em File > Reopen with enconding > E escolha UTF-8
+
+##Comando para facilitar:
+
+- Abrir um novo Chunk: Ctrl + Alt + I
+- Executar um Chunk por completo: Ctrl + Shift + Enter
+- Executar apenas uma linha do Chunk: Ctrl + Enter
+
+
 Nos exemplos a seguir, iremos utilizar dataSets que já vem no R
 
 ##Diferença entre bar plot e histograma 
@@ -89,7 +107,7 @@ Primeiro, vamos criar um novo dataFrame
 passageiros = data.frame(AirPassengers)
 ```
 
-Observe que o DF criado possui uma coluna chamada AirPassengers]
+Observe que o DF criado possui uma coluna chamada AirPassengers
 ```{r}
 View(passageiros)
 ```
@@ -117,9 +135,23 @@ matriz.vazia[is.na(matriz.vazia)] <- 0
 matriz.vazia
 ```
 
+##Entendendo GROUP_BY
+A cláusula GROUP BY agrupa linhas baseado em semelhanças entre elas.
 
-##Como calcular a proporção de linhas que tem um certo valor para uma variável categórica?
+Por exemplo, observe o DF diamonds: (execute no seu computador para ver)
+```{r}
+View(diamonds)
+```
 
+Temos a coluna "cut", que é a qualidade do corte do diamente. 
+Agora se nós quisermos saber quantos diamantes temos de cada tipo?
+Teremos que utilizar o group_by passando a coluna cut, e fazendo uso de count, para realizar a contagem.
+Ou seja, primeiro se agrupa todo DF pela coluna que você quer e depois se realiza a contagem.
+
+```{r}
+diamantePorTipo = diamonds %>% group_by(cut) %>% count(cut)
+View(diamantePorTipo)
+```
 
 
 
