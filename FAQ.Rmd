@@ -17,13 +17,14 @@ theme_set(theme_bw())
 ```
 
 
-##Problemas com caracteres estranhos num DF ou ao abrir um .Rmd num outro lugar
-- Caso ao abrir um csv esteja vendo caracteres estranhos, tente fazer o seguinte: 
-```{r}
-read.csv("arquivo.csv", encoding = "utf-8")
-```
+##Problemas com caracteres estranhos 
 
-- Caso esteja com problemas ao abrir o .Rmd em um outro computador:
+Estamos em 2017, então todo mundo precisa entender direito o que está acontecendo. “Problema em acentuação” significa que o arquivo foi escrito com um encoding e você está lendo com outro. Isso acontece geralmente porque o mundo usa UTF-8 e o windows usa outro encoding. Se você está usando windows e lendo arquivos escritos com UTF-8 (que foram salvos no linux ou mac, por exemplo), você precisa fazer com que seu programa saiba que o arquivo deve ser lido como UTF-8.
+
+- Preferences > Saving e marque lá UTF-8
+
+ou 
+
 Vá em File > Reopen with enconding > E escolha UTF-8
 
 ##Comando para facilitar:
@@ -64,7 +65,7 @@ Dado o exemplo a seguir:
 
 ```{r}
 ggplot(iris, aes(x = Species, y = Sepal.Width))+
-  geom_bar(stat = "identity")
+  geom_bar(stat = "identity") 
 ```
 
 Observamos que as barras estão desordenadas. Para deixar ordenado , devemos fazer utilizar o reorder
