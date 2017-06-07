@@ -24,6 +24,12 @@ theme_set(theme_bw())
 
 Highcharts é uma biblioteca de gráficos, que oferece uma maneira fácil de adicionar gráficos interativos. 
 
+##Diferença entre hchart() e highchart():
+
+highchart() cria gráficos com mais recursos, mais elaborados.
+
+hchart() desenha vários gráficos com um único comando.
+Por exemplo, usar hchar() e passar uma variável categórica e uma numérica ele automaticamente lhe apresentará um gráfico de barras. Se utilizar duas numéricas, um histograma. 
 
 ###Gráfico de barras:
 Para criar um gráfico de barras que mostre quantos diamantes por tipo de corte tem o dataSet diamonds:
